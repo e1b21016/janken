@@ -11,6 +11,17 @@
   <p th:if="${name}">
     Hi [[${name}]]
   </p>
+  <form action="/janken" method="post">
+    <a href="/jankengame?playerhand=pa">ぱー</a>
+    <a href="/jankengame?playerhand=gu">ぐー</a>
+    <a href="/jankengame?playerhand=choki">ちょき</a>
+  </form>
+  <br>
+  <div th:if="" ${result}>
+    <p>あなたの手:[[${playerhand}]]</p>
+    <p>相手の手:[[${cpuhand}]]</p>
+    <p>結果:[[${result}]]</p>
+  </div>
 </body>
 
 </html>
