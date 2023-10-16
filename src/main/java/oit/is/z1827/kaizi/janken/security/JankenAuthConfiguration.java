@@ -49,9 +49,9 @@ public class JankenAuthConfiguration {
     // $ sshrun htpasswd -nbBC 10 user1 p@ss
 
     UserDetails user1 = User.withUsername("user1")
-        .password("{bcrypt}$2y$10$D/DOlY2HbbeWPKcSUGY0gOkT3PzZX1PQetTaIdJA1Hs4XPzik0plW").roles("USER").build();
+        .password("{bcrypt}$2y$10$wYdy7xSLFoI9v7aAl/0ntuef4ZH8.iEq.vQ5sPWVehk60Tm1mAjCS").roles("USER").build();
     UserDetails user2 = User.withUsername("user2")
-        .password("{bcrypt}$2y$10$D/DOlY2HbbeWPKcSUGY0gOkT3PzZX1PQetTaIdJA1Hs4XPzik0plW").roles("USER").build();
+        .password("{bcrypt}$2y$10$wYdy7xSLFoI9v7aAl/0ntuef4ZH8.iEq.vQ5sPWVehk60Tm1mAjCS").roles("USER").build();
 
     // 生成したユーザをImMemoryUserDetailsManagerに渡す（いくつでも良い）
     return new InMemoryUserDetailsManager(user1, user2);
