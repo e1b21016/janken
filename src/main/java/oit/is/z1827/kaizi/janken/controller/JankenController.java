@@ -2,32 +2,32 @@ package oit.is.z1827.kaizi.janken.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-// import java.util.ArrayList;
 
+import java.util.ArrayList;
 import java.security.Principal;
-import oit.is.z1827.kaizi.janken.model.Entry;
 
-// import org.springframework.stereotype.Controller;
+import oit.is.z1827.kaizi.janken.model.User;
+import oit.is.z1827.kaizi.janken.model.UserMapper;
+
 import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.ModelMap;
 
 @Controller
 public class JankenController {
 
-  @Autowired
-  private Entry entry;
   private String loginuser;
+
+  @Autowired
+  UserMapper userMapper;
 
   @GetMapping("/janken")
   public String janken(Principal prin, ModelMap model) {
+    ArrayList<User> user = userMapper.selectAllusers();
     this.loginuser = prin.getName();
-    this.entry.addUser(loginuser);
     model.addAttribute("loginUser", this.loginuser);
-    model.addAttribute("user", this.entry);
+    model.addAttribute("user", user);
     return "janken.html";
   }
 
@@ -54,7 +54,6 @@ public class JankenController {
     }
 
     model.addAttribute("loginUser", loginuser);
-    model.addAttribute("user", this.entry.getUsers());
     model.addAttribute("playerhand", playerhand);
     model.addAttribute("cpuhand", cpuhand);
     model.addAttribute("result", result);
