@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.security.Principal;
 
 import oit.is.z1827.kaizi.janken.model.User;
+import oit.is.z1827.kaizi.janken.model.Match;
+import oit.is.z1827.kaizi.janken.model.MatchMapper;
 import oit.is.z1827.kaizi.janken.model.UserMapper;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +24,17 @@ public class JankenController {
   @Autowired
   UserMapper userMapper;
 
+  @Autowired
+  MatchMapper matchMapper;
+
   @GetMapping("/janken")
   public String janken(Principal prin, ModelMap model) {
     ArrayList<User> user = userMapper.selectAllusers();
+    ArrayList<Match> match = matchMapper.selectAllmatches();
     this.loginuser = prin.getName();
     model.addAttribute("loginUser", this.loginuser);
     model.addAttribute("user", user);
+    model.addAttribute("match", match);
     return "janken.html";
   }
 

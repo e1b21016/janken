@@ -24,10 +24,19 @@
     <a href="/jankengame?playerhand=choki">ちょき</a>
     <a href="/jankengame?playerhand=gu">ぐー</a>
   </form>
+
   <div th:if="${result}">
     <p>あなたの手:[[${playerhand}]]</p>
     <p>相手の手:[[${cpuhand}]]</p>
     <p>結果:[[${result}]]</p>
+  </div>
+
+  <h2>試合結果</h2>
+  <div th:if="${match}">
+    <ul>
+      <li th:each="match :${match}">id:[[${match.getId()}]]user1:[[${match.getUser1()}]] user2:[[${match.getuser2()}]]
+        user1の手:[[${match.getuser1Hand()}]] user2の手:[[${match.getuser2Hand()}]]</li>
+    </ul>
   </div>
 </body>
 
