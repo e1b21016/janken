@@ -12,6 +12,7 @@ import oit.is.z1827.kaizi.janken.model.MatchMapper;
 import oit.is.z1827.kaizi.janken.model.UserMapper;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.ModelMap;
@@ -36,6 +37,14 @@ public class JankenController {
     model.addAttribute("user", user);
     model.addAttribute("match", match);
     return "janken.html";
+  }
+
+  @GetMapping("/match")
+  public String match(@RequestParam int id, ModelMap model) {
+    User user = userMapper.selectById(id);
+    model.addAttribute("loginUser", this.loginuser);
+    model.addAttribute("user", user);
+    return "match.html";
   }
 
   @PostMapping("/janken")
