@@ -7,11 +7,21 @@
 </head>
 
 <body>
-  <div>
-    <a href="/logout">ログアウト</a>
-  </div>
+  <a href="/logout">ログアウト</a>
   <h1>Match</h1>
   <h2>[[${loginUser}]]V.S.[[${user.userName}]]</h2>
+
+
+  <a th:href="@{/fight(id=${user.id}, player='gu')}">ぐー</a>
+  <a th:href="@{/fight(id=${user.id}, player='choki')}">ちょき</a>
+  <a th:href="@{/fight(id=${user.id}, player='pa')}">ぱー</a>
+
+  <div th="${result}">
+    <p>あなたの手:[[${player}]]</p>
+    <p>相手の手:[[${cpu}]]</p>
+    <p>結果:[[${result}]]</p>
+  </div>
+  <a href="/janken">もどる</a>
 </body>
 
 </html>

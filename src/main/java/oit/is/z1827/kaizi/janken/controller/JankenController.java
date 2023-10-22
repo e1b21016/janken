@@ -12,7 +12,6 @@ import oit.is.z1827.kaizi.janken.model.MatchMapper;
 import oit.is.z1827.kaizi.janken.model.UserMapper;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.ModelMap;
@@ -53,12 +52,14 @@ public class JankenController {
     return "janken.html";
   }
 
-  @GetMapping("/jankengame")
-  public String pa(@RequestParam String playerhand, ModelMap model) {
+  @GetMapping("/fight")
+  public String jankengame(@RequestParam String player, @RequestParam int id,
+      ModelMap model) {
+    Match match = new Match();
+    String cpu = "pa";
     String result = "";
-    String cpuhand = "pa";
 
-    switch (playerhand) {
+    switch (player) {
       case "pa":
         result = "Draw";
         break;
@@ -68,11 +69,18 @@ public class JankenController {
         result = "You Lose";
         break;
     }
+    match.setuser1(userMapper.selectAllByuserName(this.loginuser).getId());
+    match.setuser2(id);
+    match.setuser1Hand(player);
+    match.setuser2Hand(cpu);
+
+    matchMapper.insertmatch(match);
 
     model.addAttribute("loginUser", loginuser);
-    model.addAttribute("playerhand", playerhand);
-    model.addAttribute("cpuhand", cpuhand);
+    model.addAttribute("user", userMapper.selectById(id));
+    model.addAttribute("player", player);
+    model.addAttribute("cpu", cpu);
     model.addAttribute("result", result);
-    return "janken.html";
+    return "match.html";
   }
 }
