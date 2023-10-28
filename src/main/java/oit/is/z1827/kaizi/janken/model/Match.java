@@ -3,6 +3,7 @@ package oit.is.z1827.kaizi.janken.model;
 public class Match {
   int id, user1, user2;
   String user1Hand, user2Hand;
+  boolean isActive;
 
   public int getUser1() {
     return user1;
@@ -42,6 +43,14 @@ public class Match {
 
   public void setId(int id) {
     this.id = id;
+  }
+
+  public boolean getisActive() {
+    return isActive;
+  }
+
+  public void setisActive(boolean isActive) {
+    this.isActive = isActive;
   }
 
 }
