@@ -8,6 +8,8 @@ import java.security.Principal;
 
 import oit.is.z1827.kaizi.janken.model.User;
 import oit.is.z1827.kaizi.janken.model.Match;
+import oit.is.z1827.kaizi.janken.model.Matchinfo;
+import oit.is.z1827.kaizi.janken.model.MatchinfoMapper;
 import oit.is.z1827.kaizi.janken.model.MatchMapper;
 import oit.is.z1827.kaizi.janken.model.UserMapper;
 
@@ -26,6 +28,9 @@ public class JankenController {
 
   @Autowired
   MatchMapper matchMapper;
+
+  @Autowired
+  MatchinfoMapper matchinfoMapper;
 
   @GetMapping("/janken")
   public String janken(Principal prin, ModelMap model) {
@@ -56,6 +61,7 @@ public class JankenController {
   public String jankengame(@RequestParam String player, @RequestParam int id,
       ModelMap model) {
     Match match = new Match();
+    Matchinfo matchinfo = new Matchinfo();
     String cpu = "pa";
     String result = "";
 
@@ -69,6 +75,12 @@ public class JankenController {
         result = "You Lose";
         break;
     }
+    matchinfo.setuser1(userMapper.selectAllByuserName(this.loginuser).getId());
+    matchinfo.setuser2(id);
+    matchinfo.setuser1Hand(player);
+    matchinfo.setisActive(true);
+    matchinfoMapper.insertmatchinfo(matchinfo);
+
     match.setuser1(userMapper.selectAllByuserName(this.loginuser).getId());
     match.setuser2(id);
     match.setuser1Hand(player);
@@ -81,6 +93,6 @@ public class JankenController {
     model.addAttribute("player", player);
     model.addAttribute("cpu", cpu);
     model.addAttribute("result", result);
-    return "match.html";
+    return "wait.html";
   }
 }
