@@ -36,6 +36,9 @@ public class JankenController {
   public String janken(Principal prin, ModelMap model) {
     ArrayList<User> user = userMapper.selectAllusers();
     ArrayList<Match> match = matchMapper.selectAllmatches();
+
+    ArrayList<Matchinfo> matchinfoMappers = matchinfoMapper.selectAllmatchinfo();
+    model.addAttribute("matchinfoMappers", matchinfoMappers);
     this.loginuser = prin.getName();
     model.addAttribute("loginUser", this.loginuser);
     model.addAttribute("user", user);
