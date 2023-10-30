@@ -19,6 +19,12 @@
   </ul>
   </p>
 
+  <h2>アクティブな試合</h2>
+  <a th:each="matchinfoMapper :${matchinfoMappers}">
+    id:[[${matchinfoMapper.getId()}]]user1:[[${matchinfoMapper.getUser1()}]] user2:[[${matchinfoMapper.getuser2()}]]
+    isActive:[[${matchinfoMapper.getisActive}]]
+  </a>
+
   <h2>試合結果</h2>
   <div th:if="${match}">
     <ul>
